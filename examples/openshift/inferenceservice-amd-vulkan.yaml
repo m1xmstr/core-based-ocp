@@ -5,6 +5,7 @@ metadata:
   namespace: private-ai-app
 spec:
   predictor:
+    # One dedicated replica keeps capacity predictable on a single AI worker.
     minReplicas: 1
     maxReplicas: 1
     nodeSelector:
@@ -13,6 +14,8 @@ spec:
     - name: kserve-container
       image: quay.io/example/llama-cpp:server-vulkan
       args:
+      # The model path here is intentionally generic. Replace it with a model
+      # that exists in your own cache or mounted PVC.
       - --model
       - /models/qwen2.5-7b-instruct-q4_k_m.gguf
       - --host
@@ -37,4 +40,6 @@ spec:
         mountPath: /models
     volumes:
     - name: model-cache
+      # `emptyDir` keeps the example portable. In a real environment you will
+      # usually want a PVC or a node-local cache for larger GGUF files.
       emptyDir: {}

@@ -4,6 +4,8 @@ metadata:
   name: ai-inference-gateway
   namespace: private-ai-app
 spec:
+  # Separate the gateway from the web tier so you can scale or roll it
+  # independently when model-serving behavior changes.
   replicas: 2
   selector:
     matchLabels:
@@ -13,6 +15,7 @@ spec:
       labels:
         app.kubernetes.io/name: ai-inference-gateway
     spec:
+      # Replace this with the labels or topology hints used in your own cluster.
       nodeSelector:
         node-role.kubernetes.io/ai-worker: ""
       containers:

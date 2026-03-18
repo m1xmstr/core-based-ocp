@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
+  # Use a namespace that is clearly tied to your AI application.
   name: private-ai-app
   labels:
     app.kubernetes.io/part-of: private-ai-app

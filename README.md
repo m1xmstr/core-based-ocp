@@ -1,3 +1,8 @@
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Platform: OpenShift](https://img.shields.io/badge/Platform-OpenShift%204.x-red.svg)
+![AI: Local LLM](https://img.shields.io/badge/AI-Local%20LLM%20Inference-blue.svg)
+![Hardware: AMD Strix Halo](https://img.shields.io/badge/Hardware-AMD%20Strix%20Halo-orange.svg)
+
 # Core-Based OpenShift for Private AI Apps
 
 This public repository documents how we brought a private AI chat application onto OpenShift using modest CPU-first hardware, and what changed when we later added a single AMD Strix Halo worker for accelerated inference.
@@ -43,6 +48,14 @@ That changed the platform in three important ways:
 - it improved latency and consistency for longer prompts and larger models
 - it created a credible OpenShift AI and KServe story for demos, experimentation, and future scale-out
 
+## Quick Start
+
+If you just want the key patterns:
+1. [Core-only phase](docs/03-core-only-phase.md) - running AI on modest hardware
+2. [Adding a Strix Halo worker](docs/06-adding-a-strix-halo-worker.md) - what one strong node changes
+3. [Lessons learned](docs/07-lessons-learned.md) - what we'd do differently
+4. [Next hardware options](docs/08-next-hardware-options.md) - where to go from here
+
 ## High-Level Architecture
 ```mermaid
 flowchart LR
@@ -75,3 +88,22 @@ A lot of public AI infrastructure content jumps from laptop demos straight to mu
 - engineers evaluating whether CPU-first OpenShift can host a useful LLM-backed product
 - teams planning a first dedicated AI worker
 - people who want a practical bridge between homelab experimentation and production habits
+
+## Contributing
+
+This repository is primarily a reference repository. If you've run a similar
+setup and have lessons to share, issues and pull requests are welcome. Please
+keep contributions generic and sanitized: no real production identifiers, no
+secrets, and no proprietary application internals.
+
+## About
+
+This repository is maintained by Matt Faust as part of the PRIORITYmicro
+project portfolio. It documents real infrastructure patterns from a private AI
+platform running on OpenShift.
+
+- [PRIORITYmicro](https://www.prioritymicro.com) - Parent project
+- Built with Red Hat OpenShift Container Platform
+- AI inference powered by AMD Strix Halo
+
+© 2026 Matt Faust / PRIORITYmicro - Licensed under MIT

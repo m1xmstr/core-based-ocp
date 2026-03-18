@@ -5,6 +5,8 @@ import time
 
 import requests
 
+# Set these in your notebook environment so the example stays reusable across
+# clusters and products.
 META_URL = os.environ.get("APP_META_URL", "https://chat.example.com/api/meta")
 KSERVE_URL = os.environ.get(
     "KSERVE_URL",
@@ -30,6 +32,8 @@ meta_resp, meta_elapsed = timed_get(META_URL)
 meta = meta_resp.json() if meta_resp.ok else {"status_code": meta_resp.status_code}
 
 payload = {
+    # Keep the model label generic; different runtimes will expect different
+    # naming conventions or revision labels.
     "model": os.environ.get("KSERVE_MODEL", "qwen2.5:7b"),
     "messages": [
         {"role": "system", "content": "You are a concise technical demo assistant."},

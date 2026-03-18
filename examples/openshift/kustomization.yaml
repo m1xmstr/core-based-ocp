@@ -1,6 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: private-ai-app
+# This is intentionally small so readers can fork it and adapt the pieces they
+# need without untangling a large production overlay.
 resources:
   - namespace.yaml
   - configmap.yaml

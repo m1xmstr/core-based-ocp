@@ -3,6 +3,8 @@
   hosts: localhost
   gather_facts: false
   vars:
+    # Replace these values with your own namespaces, service names, and
+    # metadata route. Keep credentials in AAP credential objects, not here.
     app_namespace: private-ai-app
     notebook_namespace: ai-notebooks
     inference_service_name: amd-unified-memory-llama
@@ -16,6 +18,8 @@
         mode: "0755"
 
     - name: Gather cluster version
+      # Pull the ClusterVersion resource so operators can confirm the platform
+      # state before a demo or a risky rollout.
       kubernetes.core.k8s_info:
         api_version: config.openshift.io/v1
         kind: ClusterVersion
@@ -45,6 +49,7 @@
       register: inference_service
 
     - name: Query app meta endpoint
+      # This is optional but useful when the app publishes version/build info.
       ansible.builtin.uri:
         url: "{{ app_meta_url }}"
         method: GET

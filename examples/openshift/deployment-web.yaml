@@ -4,6 +4,8 @@ metadata:
   name: ai-web
   namespace: private-ai-app
 spec:
+  # Three replicas is a reasonable starting point for a public web tier on a
+  # small cluster, but reduce this for lab clusters with limited capacity.
   replicas: 3
   selector:
     matchLabels:
@@ -22,6 +24,8 @@ spec:
         - configMapRef:
             name: app-config
         command:
+        # This keeps the example explicit about a streaming-friendly Gunicorn
+        # configuration. Adapt worker and thread counts to your workload.
         - python
         - -m
         - gunicorn
