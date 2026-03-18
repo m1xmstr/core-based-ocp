@@ -1,45 +1,24 @@
 apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
 metadata:
-  name: amd-unified-memory-llama
+  name: local-llm-vulkan
   namespace: private-ai-app
 spec:
   predictor:
-    # One dedicated replica keeps capacity predictable on a single AI worker.
-    minReplicas: 1
-    maxReplicas: 1
-    nodeSelector:
-      node-role.kubernetes.io/ai-worker: ""
     containers:
-    - name: kserve-container
-      image: quay.io/example/llama-cpp:server-vulkan
-      args:
-      # The model path here is intentionally generic. Replace it with a model
-      # that exists in your own cache or mounted PVC.
-      - --model
-      - /models/qwen2.5-7b-instruct-q4_k_m.gguf
-      - --host
-      - 0.0.0.0
-      - --port
-      - "8080"
-      - --n-gpu-layers
-      - "99"
-      - --flash-attn
-      - auto
-      ports:
-      - containerPort: 8080
-      resources:
-        requests:
-          cpu: "4"
-          memory: 8Gi
-        limits:
-          cpu: "16"
-          memory: 80Gi
-      volumeMounts:
-      - name: model-cache
-        mountPath: /models
+      - name: model-server
+        image: quay.io/example/llama-vulkan:latest
+        args:
+          - --model
+          - /models/qwen-7b.gguf
+          - --host
+          - 0.0.0.0
+          - --port
+          - "8080"
+        volumeMounts:
+          - name: model-cache
+            mountPath: /models
     volumes:
-    - name: model-cache
-      # `emptyDir` keeps the example portable. In a real environment you will
-      # usually want a PVC or a node-local cache for larger GGUF files.
-      emptyDir: {}
+      - name: model-cache
+        persistentVolumeClaim:
+          claimName: ai-model-cache

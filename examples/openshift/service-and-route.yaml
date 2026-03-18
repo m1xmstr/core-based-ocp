@@ -4,21 +4,21 @@ metadata:
   name: ai-web
   namespace: private-ai-app
 spec:
-  # Keep the service simple; route policy and TLS termination can evolve later.
   selector:
-    app.kubernetes.io/name: ai-web
+    app: ai-web
   ports:
-  - name: http
-    port: 80
-    targetPort: 8080
+    - name: http
+      port: 80
+      targetPort: 8080
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: ai-web
   namespace: private-ai-app
+  annotations:
+    haproxy.router.openshift.io/timeout: 10m
 spec:
-  # For non-OpenShift environments, replace this Route with an Ingress.
   to:
     kind: Service
     name: ai-web

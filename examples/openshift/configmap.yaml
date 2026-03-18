@@ -1,16 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: app-config
+  name: ai-web-config
   namespace: private-ai-app
 data:
-  # Keep environment values generic in public examples. Real secrets belong in
-  # a Secret or an external secret manager, not in a ConfigMap.
-  APP_VERSION: v0.1.0
-  APP_ENV: production
-  DB_BACKEND: postgres
-  WEB_CONCURRENCY: "4"
-  WEB_THREADS: "4"
-  ENABLE_STREAMING: "1"
-  INFERENCE_GATEWAY_ENDPOINTS: "http://ai-inference-gateway:8081,http://cpu-fallback:8080/v1/chat/completions"
-  DEFAULT_MODEL_CLASS: compact
+  APP_VERSION: v1.0.0
+  FEATURE_STREAMING: "true"
+  FEATURE_DOCUMENTS: "true"
+  INFERENCE_PROFILE: balanced

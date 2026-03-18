@@ -1,60 +1,91 @@
 # Known Constraints and Tradeoffs
 
-## Compact Cluster Reality
-A three-node compact OpenShift cluster can absolutely host a useful private AI application, but it has hard limits.
+A useful public repository should not pretend the platform is perfect. This document lists the practical constraints that still shaped the design.
 
-Expect tradeoffs in:
-- control-plane headroom
-- memory pressure sensitivity
-- upgrade complexity when application workloads share core nodes
-- storage and inference competition if boundaries are weak
+## 1. Compact cluster reality
+A three-node compact OpenShift cluster can host a real private AI application, but it has hard limits.
 
-## CPU-First Reality
-CPU-first inference is useful but not magical.
+The main constraints are:
+- control-plane and worker responsibilities share the same hardware class
+- headroom is tighter than on a larger rack environment
+- oversized application limits become cluster problems very quickly
+- upgrades require more discipline because node drain assumptions matter more
+
+## 2. CPU-first reality
+CPU-first inference is real, but it has a narrow comfort zone.
 
 It is best for:
-- smaller models
-- shorter prompts
-- operational bootstrap
-- product development
+- small models
+- short prompts
+- bootstrap product development
+- baseline operational validation
 
 It is weaker for:
-- long-form generation at scale
-- larger context windows
-- high-concurrency heavy inference
+- multi-page writing
+- larger contexts under concurrency
+- premium first-token latency
+- large-model experimentation at scale
 
-## AMD Strix Halo Reality
-A Strix Halo worker can materially improve the experience, but it is not a plug-and-play miracle box.
+## 3. AMD Strix Halo reality
+The Strix Halo worker is one of the most interesting parts of this architecture, but it is not plug-and-play in the simplistic sense.
 
-You still need to validate:
-- BIOS settings
-- kernel support
-- GPU device exposure
-- runtime flags
-- memory behavior under load
+Constraints we had to work around:
+- `gfx1151` is not the easiest path in mainstream accelerator documentation
+- the validated runtime path leaned on Vulkan RADV rather than a clean standard-ROCm story
+- GTT stayed around `62 GB` in the tested CoreOS path instead of reaching the most optimistic theoretical target
 
-## OpenShift AI Reality
-OpenShift AI adds real value, but only if you use it intentionally.
+## 4. Storage reality
+ODF across compact nodes works, but it is still compact-cluster storage.
 
-It helps with:
-- model serving
-- evaluation workflows
-- demo credibility
-- operational clarity
+Observed constraints:
+- shared home-lab networking can produce occasional latency spikes
+- storage workloads and inference should be separated clearly
+- local NVMe model cache is a different problem from durable cluster storage and must be treated that way
 
-It does not replace:
-- application engineering
-- routing correctness
-- rollout discipline
-- clear observability
+## 5. Signal and helper-service reality
+Small utility services can have surprisingly important state.
 
-## Public Repo Reality
-This repository intentionally does not expose the proprietary logic of the private application it came from.
+Example lesson:
+- Signal CLI looked simple until pod restarts wiped registration state from ephemeral storage
+- persistent mounts were required even though the service was not large
 
-That means some things are deliberately generalized:
-- exact request routing
-- advanced product logic
-- customer-facing differentiation
-- private operational controls
+The broader point is that helper tooling should be reviewed for state, not just for CPU or memory footprint.
 
-This is a feature, not a limitation.
+## 6. Networking reality
+This architecture ran on home-lab-style networking, not a full datacenter fabric.
+
+That means:
+- a few milliseconds of added latency are normal
+- heavy inference and storage traffic can interact in ways you would not see on stronger switching
+- alert thresholds built for large enterprise networks may need interpretation rather than blind panic
+
+## 7. Internet dependency reality
+Even a mostly private AI platform still depends on outside services if you use modern convenience features.
+
+Typical dependencies may include:
+- edge DNS or CDN
+- OAuth providers
+- public search APIs
+- outbound package or model fetches
+
+That does not make the platform less private. It means you should be honest about what parts are local and what parts are still attached to external systems.
+
+## 8. Power and acoustics reality
+A compact four-node environment with one serious AI worker is still a real piece of infrastructure.
+
+Practical expectations:
+- total draw under load can land around `400-600W`
+- the AI worker changes heat and fan behavior materially compared with the control-plane mini PCs
+- UPS sizing should be based on the whole environment, not just the compact nodes
+
+## 9. Public repo reality
+This repository is intentionally sanitized.
+
+It does not publish:
+- real cluster names
+- real routes or domains
+- real secrets
+- internal product differentiation logic
+- exact production routing algorithms
+
+That is intentional. The goal is to share the architecture and operations patterns without leaking private implementation detail.

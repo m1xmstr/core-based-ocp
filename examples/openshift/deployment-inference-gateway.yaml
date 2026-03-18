@@ -4,41 +4,26 @@ metadata:
   name: ai-inference-gateway
   namespace: private-ai-app
 spec:
-  # Separate the gateway from the web tier so you can scale or roll it
-  # independently when model-serving behavior changes.
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: ai-inference-gateway
+      app: ai-inference-gateway
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: ai-inference-gateway
+        app: ai-inference-gateway
     spec:
-      # Replace this with the labels or topology hints used in your own cluster.
       nodeSelector:
-        node-role.kubernetes.io/ai-worker: ""
+        node-role.kubernetes.io/worker: ""
       containers:
-      - name: gateway
-        image: quay.io/example/private-ai-web:latest
-        command:
-        - python
-        - /opt/app/inference_gateway.py
-        ports:
-        - containerPort: 8081
-        envFrom:
-        - configMapRef:
-            name: app-config
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8081
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        resources:
-          requests:
-            cpu: 250m
-            memory: 512Mi
-          limits:
-            cpu: "2"
-            memory: 2Gi
+        - name: gateway
+          image: quay.io/example/private-ai-gateway:latest
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - name: model-cache
+              mountPath: /models
+      volumes:
+        - name: model-cache
+          persistentVolumeClaim:
+            claimName: ai-model-cache

@@ -1,73 +1,26 @@
 ---
-- name: Core-Based OpenShift AI Health Snapshot
+- name: Collect private AI platform health snapshot
   hosts: localhost
   gather_facts: false
-  vars:
-    # Replace these values with your own namespaces, service names, and
-    # metadata route. Keep credentials in AAP credential objects, not here.
-    app_namespace: private-ai-app
-    notebook_namespace: ai-notebooks
-    inference_service_name: amd-unified-memory-llama
-    output_dir: /tmp/core-based-ocp
-    app_meta_url: https://chat.example.com/api/meta
   tasks:
-    - name: Ensure output directory exists
-      ansible.builtin.file:
-        path: "{{ output_dir }}"
-        state: directory
-        mode: "0755"
+    - name: Check cluster operators
+      ansible.builtin.command: oc get co
+      register: cluster_operators
+      changed_when: false
 
-    - name: Gather cluster version
-      # Pull the ClusterVersion resource so operators can confirm the platform
-      # state before a demo or a risky rollout.
-      kubernetes.core.k8s_info:
-        api_version: config.openshift.io/v1
-        kind: ClusterVersion
-        name: version
-      register: clusterversion
+    - name: Check application pods
+      ansible.builtin.command: oc -n private-ai-app get pods
+      register: app_pods
+      changed_when: false
 
-    - name: Gather cluster operators
-      kubernetes.core.k8s_info:
-        api_version: config.openshift.io/v1
-        kind: ClusterOperator
-      register: clusteroperators
+    - name: Check public route metadata
+      ansible.builtin.command: curl -fsS https://private-ai-app.example.com/api/meta
+      register: app_meta
+      changed_when: false
 
-    - name: Gather app deployment
-      kubernetes.core.k8s_info:
-        api_version: apps/v1
-        kind: Deployment
-        namespace: "{{ app_namespace }}"
-        name: ai-web
-      register: app_web
-
-    - name: Gather InferenceService
-      kubernetes.core.k8s_info:
-        api_version: serving.kserve.io/v1beta1
-        kind: InferenceService
-        namespace: "{{ app_namespace }}"
-        name: "{{ inference_service_name }}"
-      register: inference_service
-
-    - name: Query app meta endpoint
-      # This is optional but useful when the app publishes version/build info.
-      ansible.builtin.uri:
-        url: "{{ app_meta_url }}"
-        method: GET
-        return_content: true
-        validate_certs: true
-      register: meta_resp
-      failed_when: false
-
-    - name: Write snapshot
-      ansible.builtin.copy:
-        dest: "{{ output_dir }}/health_snapshot.json"
-        mode: "0644"
-        content: |
-          {{ {
-            'captured_at': lookup('pipe', 'date -Iseconds'),
-            'cluster_version': (((clusterversion.resources | default([{}]))[0].status.desired.version) | default('unknown')),
-            'operator_count': (clusteroperators.resources | default([]) | length),
-            'app_ready_replicas': ((((app_web.resources | default([{}]))[0].status.readyReplicas) | default(0))),
-            'inference_service_conditions': (((inference_service.resources | default([{}]))[0].status.conditions) | default([])),
-            'app_meta': (meta_resp.json | default({}))
-          } | to_nice_json }}
+    - name: Print summary
+      ansible.builtin.debug:
+        msg:
+          - "Cluster operators checked"
+          - "Application pods checked"
+          - "Route metadata checked"

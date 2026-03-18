@@ -4,30 +4,27 @@ metadata:
   name: ai-web
   namespace: private-ai-app
 spec:
-  # Conservative autoscaling is usually safer than aggressive scaling on small
-  # clusters where cold starts are expensive.
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: ai-web
-  minReplicas: 2
-  maxReplicas: 5
+  minReplicas: 3
+  maxReplicas: 6
   metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: ai-web-pdb
+  name: ai-web
   namespace: private-ai-app
 spec:
-  # Keep enough capacity online during voluntary disruptions such as node drains.
   minAvailable: 2
   selector:
     matchLabels:
-      app.kubernetes.io/name: ai-web
+      app: ai-web
