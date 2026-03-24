@@ -83,7 +83,7 @@ What fixed it:
 This is a general lesson. Stateful helper tools should be treated like stateful tools, not like optional sidecars.
 
 ## 7. Connector auto-update and compatibility should never block routing unnecessarily
-Distributed inference and mesh-style donor devices are fragile enough already.
+Distributed inference and adjacent compute endpoints are fragile enough already.
 
 A bad pattern is:
 - version mismatch equals hard routing block

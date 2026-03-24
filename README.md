@@ -57,8 +57,10 @@ graph TB
 - [Hardware Specifications](#hardware-specifications)
 - [Quick Start](#quick-start)
 - [Repository Map](#repository-map)
+- [Documentation](#documentation)
 - [AI Safety and Responsible Use Approach](#ai-safety-and-responsible-use-approach)
 - [About](#about)
+- [docs/FAMILY_AI_SAFETY_PATTERNS.md](./docs/FAMILY_AI_SAFETY_PATTERNS.md)
 - [docs/01-repo-scope-and-redactions.md](./docs/01-repo-scope-and-redactions.md)
 - [docs/02-reference-architecture.md](./docs/02-reference-architecture.md)
 - [docs/03-core-only-phase.md](./docs/03-core-only-phase.md)
@@ -114,6 +116,7 @@ graph TB
 8. Use [docs/09-operations-checklist.md](./docs/09-operations-checklist.md) as the daily and weekly runbook.
 
 ### Repository Map
+- `docs/FAMILY_AI_SAFETY_PATTERNS.md`: family AI safety design patterns for builders, with layered moderation, child-safety guidance, harmful-content handling, and sanitized architecture diagrams
 - `docs/01-repo-scope-and-redactions.md`: sanitization rules and what is intentionally excluded
 - `docs/02-reference-architecture.md`: detailed topology, networking, storage, inference, and database design
 - `docs/03-core-only-phase.md`: what the CPU-only stage felt like, where it worked, and where it broke down
@@ -131,7 +134,28 @@ graph TB
 - `examples/aap`: a small Ansible Automation Platform workflow for operational snapshots
 - `examples/notebooks`: a simple notebook-oriented demo flow for OpenShift AI environments
 
+### Documentation
+- [docs/FAMILY_AI_SAFETY_PATTERNS.md](./docs/FAMILY_AI_SAFETY_PATTERNS.md)
+- [docs/01-repo-scope-and-redactions.md](./docs/01-repo-scope-and-redactions.md)
+- [docs/02-reference-architecture.md](./docs/02-reference-architecture.md)
+- [docs/03-core-only-phase.md](./docs/03-core-only-phase.md)
+- [docs/04-application-patterns-on-openshift.md](./docs/04-application-patterns-on-openshift.md)
+- [docs/05-openshift-ai-and-aap.md](./docs/05-openshift-ai-and-aap.md)
+- [docs/06-adding-a-strix-halo-worker.md](./docs/06-adding-a-strix-halo-worker.md)
+- [docs/07-lessons-learned.md](./docs/07-lessons-learned.md)
+- [docs/08-next-hardware-options.md](./docs/08-next-hardware-options.md)
+- [docs/09-operations-checklist.md](./docs/09-operations-checklist.md)
+- [docs/10-known-constraints.md](./docs/10-known-constraints.md)
+- [docs/11-benchmark-results.md](./docs/11-benchmark-results.md)
+- [docs/12-architecture-diagrams.md](./docs/12-architecture-diagrams.md)
+- [docs/13-cost-analysis.md](./docs/13-cost-analysis.md)
+- [examples/openshift/README.md](./examples/openshift/README.md)
+- [examples/aap/README.md](./examples/aap/README.md)
+- [examples/notebooks/README.md](./examples/notebooks/README.md)
+
 ## AI Safety and Responsible Use Approach
+
+For detailed safety patterns and family AI guidance, see [docs/FAMILY_AI_SAFETY_PATTERNS.md](./docs/FAMILY_AI_SAFETY_PATTERNS.md).
 
 ### 1. Safety philosophy
 For a family-oriented AI product, safety is a product requirement, not a post-processing task.

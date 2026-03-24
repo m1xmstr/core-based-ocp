@@ -23,7 +23,7 @@ The GB10 concept is compelling because it promises:
 For a private AI platform, a GB10-class system could plausibly become:
 - a premium inference appliance
 - a dedicated large-model lane
-- a sidecar or donor endpoint before it becomes a full cluster-serving node
+- a supplemental endpoint before it becomes a full cluster-serving node
 
 ### Pros
 - potentially excellent performance density
@@ -65,14 +65,14 @@ A 5090-class workstation is attractive because it offers:
 
 ## 3. Apple Mac Studio M4 Ultra class systems
 ### Why it is interesting
-A high-end Mac Studio is compelling as a mesh or donor device because it offers:
+A high-end Mac Studio is compelling as an adjacent compute endpoint because it offers:
 - very high memory bandwidth
 - large unified memory pools
 - excellent acoustics and power efficiency
 - strong local inference characteristics for specific runtimes
 
 ### Estimated role
-- mesh inference donor
+- adjacent inference endpoint
 - sidecar inference endpoint
 - evaluation or benchmark node
 - not a direct OpenShift worker replacement in a conventional x86 cluster
@@ -88,7 +88,7 @@ A high-end Mac Studio is compelling as a mesh or donor device because it offers:
 - better treated as adjacent capacity than as a direct cluster-node substitute
 
 ### Status
-**Theoretical as a primary path, partially validated as an adjacent inference donor pattern.**
+**Theoretical as a primary path, partially validated as an adjacent inference endpoint pattern.**
 
 ## 4. NVIDIA DGX Station or DGX-class platform
 ### Why it is interesting

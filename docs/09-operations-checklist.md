@@ -136,8 +136,8 @@ Tasks:
 - verify model-cache behavior if you use local NVMe
 - review any persistent-volume growth that suggests data retention is drifting
 
-### 3. Connector or donor-device review
-If your platform includes adjacent mesh or donor devices, verify:
+### 3. Adjacent-endpoint review
+If your platform includes adjacent compute endpoints, verify:
 - they are reporting fresh health
 - version drift is understood
 - they are not being treated as routing candidates when their heartbeats are stale

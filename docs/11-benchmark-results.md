@@ -7,7 +7,7 @@ This document collects representative benchmark numbers from the reference platf
 - Prompts were drawn from real product-style use cases: greetings, weather, long-form writing, research summaries, code generation, and operational assistant tasks.
 - The CPU-only figures represent the compact-node serving phase before the dedicated AI worker was added.
 - The Strix Halo figures represent the dedicated AI-worker phase after the platform, database, and serving path were stabilized.
-- Mac mesh figures are included as adjacent-device context where relevant, not as the core cluster-serving baseline.
+- Apple Silicon adjunct figures are included as adjacent-endpoint context where relevant, not as the core cluster-serving baseline.
 
 ## Inference performance
 | Model | Device | Quantization | Prompt Eval (tok/s) | Generation (tok/s) | Time to First Token |
@@ -19,7 +19,7 @@ This document collects representative benchmark numbers from the reference platf
 | DeepSeek R1 8B | Strix Halo GPU | Q4_K_M | 350+ | 100-120 | 0.5-1.0s |
 
 ## Application benchmarks
-| Use Case | CPU-only | Strix Halo | Mac M3 Max mesh |
+| Use Case | CPU-only | Strix Halo | Apple Silicon adjunct |
 |----------|----------|------------|-----------------|
 | "Hi" response | 1-2s | <0.5s | <0.5s |
 | Weather lookup | 2-3s | 1-2s | 1-2s |
