@@ -57,6 +57,7 @@ graph TB
 - [Hardware Specifications](#hardware-specifications)
 - [Quick Start](#quick-start)
 - [Repository Map](#repository-map)
+- [AI Safety and Responsible Use Approach](#ai-safety-and-responsible-use-approach)
 - [About](#about)
 - [docs/01-repo-scope-and-redactions.md](./docs/01-repo-scope-and-redactions.md)
 - [docs/02-reference-architecture.md](./docs/02-reference-architecture.md)
@@ -129,6 +130,54 @@ graph TB
 - `examples/openshift`: sanitized manifests showing the most reusable OpenShift patterns
 - `examples/aap`: a small Ansible Automation Platform workflow for operational snapshots
 - `examples/notebooks`: a simple notebook-oriented demo flow for OpenShift AI environments
+
+## AI Safety and Responsible Use Approach
+
+### 1. Safety philosophy
+For a family-oriented AI product, safety is a product requirement, not a post-processing task.
+
+Core goals:
+- keep interactions useful for learning and daily life
+- reduce misuse paths without punishing normal users
+- preserve trust by keeping behavior predictable and explainable
+
+### 2. Moderation layers
+We recommend using multiple moderation layers instead of one all-or-nothing gate.
+
+At a high level, this means:
+- reviewing incoming requests for safety context before generation
+- applying response safeguards before output is shown
+- using safety-aware fallback behavior when a request is not suitable for normal handling
+
+The important pattern is defense in depth: no single check should carry the entire safety burden.
+
+### 3. Progressive enforcement model
+A practical enforcement model should be progressive and proportionate.
+
+Typical progression:
+- clear warnings for borderline behavior
+- temporary cooldown periods when harmful patterns continue
+- tighter account restrictions for repeated or severe misuse
+
+This approach improves outcomes by giving users a path back to normal use while still protecting others.
+
+### 4. Safe tutoring model
+In learning-focused assistants, safety should preserve educational momentum.
+
+When a request is unsafe or harmful, a safer tutoring flow should:
+- refuse harmful direction directly
+- redirect to constructive alternatives
+- keep the response framed around learning, problem solving, and student support
+
+### 5. Operational lessons learned
+In production, safety quality depends on operational discipline as much as model quality.
+
+What consistently helps:
+- clear guardrail ownership and review cadence
+- reliable fallback behavior for uncertain or unsafe requests
+- observability that supports trust review without exposing sensitive internals
+
+Implementation details are intentionally limited to protect system safety and integrity.
 
 ### About
 This repository is maintained by Matt Faust as part of the PRIORITYmicro project portfolio. It documents real infrastructure patterns from a private AI platform running on bare-metal OpenShift.
