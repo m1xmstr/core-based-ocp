@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
 """Minimal notebook-style demo for a private AI serving endpoint."""
 
 import json

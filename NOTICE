@@ -1,0 +1,16 @@
+Nessa AI Reference Architecture
+Copyright 2026 Matthew Faust
+
+This repository contains public-safe reference architecture documentation,
+examples, diagrams, and validation patterns for the Nessa AI project.
+
+Nessa AI, TryNessa.com, NessaClaw, Secure Connector, Linked Devices, and
+related product names are used to describe the Nessa project and do not grant
+trademark rights.
+
+OpenClaw is referenced as upstream/open-source technology where applicable.
+NessaClaw is Nessa's guarded, managed product/integration surface built around
+Nessa authentication, entitlement, policy, storage, audit, and safety controls.
+
+Third-party notices and upstream license notices must be preserved where
+third-party content is copied or adapted.

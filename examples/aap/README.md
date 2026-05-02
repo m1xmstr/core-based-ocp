@@ -7,3 +7,7 @@ Use it as a starting point for:
 - route checks
 - pod status snapshots
 - pre-demo validation
+
+Example playbook:
+
+- `nessa_ai_health_snapshot.yml`

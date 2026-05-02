@@ -15,7 +15,7 @@ A major point of this architecture is that useful private AI does not require an
 | Item | Cost / month |
 |------|--------------|
 | Electricity (~400-600W average) | $30-50 |
-| Cloudflare or similar edge layer | $0 on free tier |
+| Optional edge layer | $0 on free tier |
 | Domain names | ~$2 |
 | Search API budget | ~$5 |
 | **Total monthly** | **~$37-57** |

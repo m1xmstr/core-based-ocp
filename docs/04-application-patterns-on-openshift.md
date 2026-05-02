@@ -197,7 +197,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ai-env-config
-Data:
+data:
   APP_VERSION: vX.Y.Z
   ENABLE_KSERVE: "true"
   ENABLE_SIGNAL: "true"
@@ -220,8 +220,8 @@ metadata:
   name: ai-app-secrets
 type: Opaque
 stringData:
-  POSTGRES_PASSWORD: change-me
-  OAUTH_CLIENT_SECRET: change-me
+  POSTGRES_PASSWORD: <redacted-secret>
+  OAUTH_CLIENT_SECRET: <redacted-secret>
 ```
 
 ## Zero-Downtime Rollouts
