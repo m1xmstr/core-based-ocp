@@ -11,6 +11,10 @@ This repository shares the architecture patterns, validation discipline, and pla
 
 Nessa AI is a private family-focused AI platform built around a simple principle: AI should help people learn, protect private work, and use user-controlled compute where possible.
 
+> "Our goal is to help people do great things and improve humanity through AI."
+>
+> Matt Faust, 2026-05-03
+
 ## Why This Repo Is Different
 
 This is not a slide-deck architecture sketch. It is a public-safe record of a real private AI platform that has been built, broken, benchmarked, repaired, and hardened over many production runs.
@@ -36,6 +40,7 @@ It documents:
 - private-AI inference lane design across cluster GPU, CPU fallback, Apple Silicon Linked Devices, and BYO-AI concepts
 - validation discipline, staging-before-production release habits, browser proof expectations, and exact-digest promotion mindset
 - public-safe family AI, Learning, OCR/vision, Linked Devices, and NessaClaw boundary patterns
+- Smart Home patterns using Home Assistant as the open-source hub where practical
 - sanitized lessons from running a private AI product on real hardware
 
 ## What This Repo Is Not
@@ -81,6 +86,7 @@ The production product has evolved beyond the original CPU-first cluster. Curren
 - Apple Silicon Linked Devices, including M3 Max as an earlier reference and M5 Max with 128 GB unified memory as the current high-memory private compute lane
 - GPT-OSS 120B class experimentation on Apple Silicon with fail-closed route truth
 - OCR and AI Vision emphasis on private Apple Silicon and vision-language model testing
+- Smart Home as a simple household operations surface, with Home Assistant used where it helps connect real devices
 - Hugging Face model research with validation before promotion
 - fail-closed privacy posture when a requested private route is unavailable
 - NessaClaw as Nessa's guarded private agent-workspace surface over OpenClaw-compatible infrastructure
@@ -149,14 +155,31 @@ Linked Devices are a public-safe pattern for user-owned private compute:
 
 See [docs/04-linked-devices-public-pattern.md](./docs/04-linked-devices-public-pattern.md) and [docs/05-secure-connector-public-boundary.md](./docs/05-secure-connector-public-boundary.md).
 
+## Smart Home and Home Assistant
+
+Nessa Smart Home is meant to answer simple household questions quickly:
+
+- is the internet okay?
+- are cameras and core devices reachable?
+- what changed since the last check?
+- can a parent see the important status without becoming a network engineer?
+
+Home Assistant is the open-source smart-home project Nessa uses where practical as a hub and integration model. Nessa recognizes and links upstream projects plainly instead of presenting community work as Nessa-owned work.
+
+See [docs/15-smart-home-and-home-assistant.md](./docs/15-smart-home-and-home-assistant.md).
+
 ## NessaClaw / OpenClaw-Compatible Private Agent Workspaces
 
-NessaClaw is Nessa's managed private agent-workspace product surface. It uses Nessa authentication, entitlement, policy, storage, audit, safety, and kill-switch controls around OpenClaw-compatible infrastructure.
+NessaClaw is Nessa's guarded private agent-workspace surface.
+
+OpenClaw is the upstream open-source project: https://github.com/openclaw/openclaw
+
+NessaClaw adds the Nessa layer: authentication, entitlement, policy, storage, audit, safety, and kill-switch controls.
 
 Public positioning:
 
 - use **NessaClaw** for the Nessa product name
-- use **OpenClaw** only for technical/upstream attribution
+- use **OpenClaw** for the upstream project
 - users interact with Nessa, not a raw OpenClaw route
 - safe WebChat and read-only skills come first
 - high-impact tools remain locked unless separately approved and validated
@@ -205,6 +228,7 @@ Primary public reference docs:
 - [docs/11-contributing.md](./docs/11-contributing.md)
 - [docs/12-license-and-attribution.md](./docs/12-license-and-attribution.md)
 - [docs/14-hardware-and-model-lab.md](./docs/14-hardware-and-model-lab.md)
+- [docs/15-smart-home-and-home-assistant.md](./docs/15-smart-home-and-home-assistant.md)
 
 Diagrams:
 
@@ -235,7 +259,7 @@ This repository is licensed under the Apache License 2.0. It covers only the pub
 
 It does not publish or license the private TryNessa.com product source code, Secure Connector internals, production configuration, tenant logic, private routing heuristics, account flows, proprietary Learning/Homework Buddy implementation, secrets, credentials, or private infrastructure.
 
-OpenClaw is upstream/open-source technology; NessaClaw is Nessa's guarded product integration and does not imply ownership of upstream OpenClaw. Preserve upstream license notices if any OpenClaw MIT-licensed material is copied or adapted.
+Nessa recognizes the open-source projects it builds around or integrates with, including Home Assistant and OpenClaw. NessaClaw is Nessa's guarded product surface; OpenClaw remains the upstream project. Smart Home uses Home Assistant where practical; Home Assistant remains its own open-source project. Preserve upstream license notices when third-party material is copied or adapted.
 
 Red Hat, OpenShift, OpenShift AI, OpenShift Virtualization, Ansible Automation Platform, Event-Driven Ansible, and related marks are trademarks of Red Hat, Inc. Product names are used factually.
 

@@ -29,13 +29,25 @@ This repository documents public-safe architecture patterns and lessons learned.
 
 ## OpenClaw Attribution
 
-OpenClaw is upstream/open-source technology. NessaClaw is Nessa's managed, guarded product surface built around Nessa authentication, entitlement, policy, storage, audit, and safety controls over OpenClaw-compatible infrastructure.
+OpenClaw is an upstream open-source project: https://github.com/openclaw/openclaw
+
+NessaClaw is Nessa's guarded product surface built around Nessa authentication, entitlement, policy, storage, audit, and safety controls over OpenClaw-compatible infrastructure.
 
 OpenClaw remains upstream/technical attribution where referenced. NessaClaw is the Nessa product/integration surface.
 
 If any OpenClaw MIT-licensed code, documentation, manifests, or examples are copied or adapted into this repository, preserve their original MIT notices and upstream copyright notices. Do not relicense upstream MIT material as Apache-only.
 
 At the time of this document, the repository references OpenClaw conceptually and does not intentionally publish full OpenClaw-derived deployment recipes.
+
+## Home Assistant Attribution
+
+Home Assistant is an upstream open-source smart-home project:
+
+- website: https://www.home-assistant.io/
+- GitHub organization: https://github.com/home-assistant
+- Core repository: https://github.com/home-assistant/core
+
+Nessa Smart Home uses Home Assistant where practical as a hub and integration model. Home Assistant remains its own project; Nessa does not imply ownership of Home Assistant or its upstream integrations. Home Assistant source code is not republished in this reference repo.
 
 ## Red Hat Product Names
 
@@ -54,6 +66,7 @@ This reference architecture may discuss public technologies such as:
 - Apple Silicon
 - AMD Strix Halo
 - Hugging Face
+- Home Assistant
 - Ollama
 - llama.cpp
 - MLX

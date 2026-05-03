@@ -13,6 +13,7 @@ flowchart LR
   Safety --> AAP["AAP automation"]
   Safety --> EDA["Event-Driven Ansible"]
   Safety --> Devices["Linked Devices"]
+  Safety --> Home["Smart Home"]
   Safety --> BYO["BYO-AI providers"]
 
   OCP --> Data["PostgreSQL, documents, workspace storage"]
@@ -21,6 +22,8 @@ flowchart LR
   AAP --> Ops["Runbooks and health snapshots"]
   EDA --> Events["Event-driven release and ops hooks"]
   Devices --> Private["Private user-owned compute"]
+  Home --> HA["Home Assistant hub pattern"]
+  Home --> Cameras["Private camera proxy pattern"]
   BYO --> External["Explicit user-chosen provider"]
 
   Data --> Control
@@ -29,6 +32,8 @@ flowchart LR
   Ops --> Control
   Events --> Control
   Private --> Control
+  HA --> Control
+  Cameras --> Control
   External --> Control
   Control --> Response["Private, policy-aware response"]
   Response --> User

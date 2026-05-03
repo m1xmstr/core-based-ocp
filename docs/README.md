@@ -18,6 +18,7 @@ Start with:
 - [11-contributing.md](./11-contributing.md)
 - [12-license-and-attribution.md](./12-license-and-attribution.md)
 - [14-hardware-and-model-lab.md](./14-hardware-and-model-lab.md)
+- [15-smart-home-and-home-assistant.md](./15-smart-home-and-home-assistant.md)
 
 Diagrams:
 
@@ -34,3 +35,7 @@ Hardware and model-lab highlights:
 - [08-ocr-ai-vision-public-pattern.md](./08-ocr-ai-vision-public-pattern.md)
 - [11-benchmark-results.md](./11-benchmark-results.md)
 - [14-hardware-and-model-lab.md](./14-hardware-and-model-lab.md)
+
+Smart Home highlights:
+
+- [15-smart-home-and-home-assistant.md](./15-smart-home-and-home-assistant.md)

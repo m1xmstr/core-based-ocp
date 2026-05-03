@@ -4,15 +4,19 @@
 
 This document explains NessaClaw in public-safe terms.
 
-NessaClaw is Nessa's managed, guarded product surface for private agent workspaces. OpenClaw is upstream/open-source technology and should be referenced only as technical/upstream attribution or as OpenClaw-compatible infrastructure.
+NessaClaw is Nessa's guarded private agent-workspace surface.
+
+OpenClaw is an upstream open-source project. Nessa references it plainly and does not claim ownership of it.
+
+Upstream link: https://github.com/openclaw/openclaw
 
 ## Naming
 
 Use:
 
 - **NessaClaw** for the Nessa product surface
-- **OpenClaw** for upstream/open-source attribution
-- **OpenClaw-compatible infrastructure** for the technical compatibility layer
+- **OpenClaw** for the upstream project
+- **OpenClaw-compatible infrastructure** for the compatibility layer
 
 Do not imply that Nessa owns upstream OpenClaw.
 
@@ -68,7 +72,9 @@ Examples of high-impact categories:
 
 ## OpenClaw Attribution
 
-OpenClaw is upstream/open-source technology. NessaClaw is Nessa's managed, guarded integration and product surface.
+OpenClaw is an open-source project.
+
+NessaClaw is Nessa's guarded product layer around Nessa auth, policy, storage, audit, safety, and workspace controls.
 
 If any OpenClaw-derived code, manifests, docs, or examples are copied or adapted into this repo, preserve upstream copyright and MIT license notices.
 

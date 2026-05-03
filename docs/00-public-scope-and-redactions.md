@@ -31,9 +31,9 @@ Public docs should not expose:
 
 | Class | Publish posture | Examples |
 |---|---|---|
-| Green | Safe to publish | High-level architecture diagrams, Red Hat product integration patterns, validation methodology, hardware comparison approach, high-level Linked Devices concept, high-level BYO-AI concept, high-level OCR / AI Vision safety pattern, NessaClaw public positioning, sanitized run summaries, benchmark methods, sanitized results, lessons learned |
+| Green | Safe to publish | High-level architecture diagrams, Red Hat product integration patterns, validation methodology, hardware comparison approach, high-level Linked Devices concept, high-level BYO-AI concept, high-level OCR / AI Vision safety pattern, Smart Home and Home Assistant public pattern, NessaClaw public positioning, sanitized run summaries, benchmark methods, sanitized results, lessons learned |
 | Amber | Publish only after redaction | Config examples, screenshots, route names, logs, topology diagrams, benchmark raw outputs, model lists, OpenShift object names, connector examples, AAP/EDA event examples |
-| Red | Never publish | Tokens, keys, passwords, cookies, real IP addresses, private hostnames, user emails, account IDs, production DB rows, Secure Connector protocol details, tunnel mechanics, pairing/auth flows, raw configmaps/secrets, exact routing heuristics, Learning/Homework Buddy lesson logic, OCR/vision bypass details, internal price or margin math, child/family/private data, full NessaClaw execution recipes |
+| Red | Never publish | Tokens, keys, passwords, cookies, real IP addresses, private hostnames, user emails, account IDs, production DB rows, Secure Connector protocol details, tunnel mechanics, pairing/auth flows, raw configmaps/secrets, exact routing heuristics, Learning/Homework Buddy lesson logic, OCR/vision bypass details, Smart Home tokens, raw camera URLs, private home topology, internal price or margin math, child/family/private data, full NessaClaw execution recipes |
 
 ## Green Content
 
@@ -51,6 +51,7 @@ The repo can publish public-safe material such as:
 - Linked Devices as a user-owned compute concept
 - BYO-AI as a user-controlled provider concept
 - Learning and family-safety principles
+- Smart Home as a simple household status pattern, with Home Assistant linked as upstream open-source technology
 - NessaClaw as a guarded product surface over OpenClaw-compatible infrastructure
 
 ## Amber Content
@@ -92,6 +93,7 @@ Never publish:
 - exact routing heuristics, premium route rules, model-selection formulas, fallback thresholds, quota logic, or hidden prompts
 - Learning / Homework Buddy prompt chains, worksheet parsers, anti-cheat logic, solution heuristics, lesson-state schemas, or proprietary tutor flows
 - OCR or AI Vision bypass details, classifier thresholds, hidden prompts, or exact repair heuristics
+- Smart Home tokens, raw camera URLs, private home topology, alarm/security device details, and exact home-control recipes
 - private model-selection heuristics, exact prompt suites, model-cache paths, or account-specific routing behavior
 - child, family, or private user content
 - internal cost margin math, billing decisions, or private financial analytics
