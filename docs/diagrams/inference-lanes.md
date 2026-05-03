@@ -10,8 +10,8 @@ flowchart TB
   PrivateReq -->|no, explicit user choice| BYO["BYO-AI provider lane"]
 
   PrivateLanes --> OCP["OpenShift-hosted inference"]
-  PrivateLanes --> Strix["Strix Halo accelerated lane"]
-  PrivateLanes --> Apple["Apple Silicon Linked Device lane"]
+  PrivateLanes --> Strix["Strix Halo / Ryzen AI Max+ 395<br/>OpenShift AI worker lane"]
+  PrivateLanes --> Apple["MacBook Pro M5 Max<br/>Apple Silicon Linked Device lane"]
   PrivateLanes --> CPU["CPU fallback lane"]
 
   OCP --> Gate["Route truth and output checks"]

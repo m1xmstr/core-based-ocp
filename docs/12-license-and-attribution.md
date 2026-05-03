@@ -53,6 +53,10 @@ This reference architecture may discuss public technologies such as:
 - Ceph
 - Apple Silicon
 - AMD Strix Halo
+- Hugging Face
+- Ollama
+- llama.cpp
+- MLX
 - local model runtimes
 - public AI model families
 

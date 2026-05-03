@@ -57,6 +57,25 @@ The dedicated AI worker carried:
 
 That worker was explicitly not used as a storage anchor.
 
+In the current public hardware story, this worker is represented by a Strix Halo / AMD Ryzen AI Max+ 395 class system with 128 GB unified memory. It was chosen because it could become a real OpenShift worker and carry local inference under the same platform discipline as the rest of the environment.
+
+### Apple Silicon Linked Device
+The Apple Silicon lane is intentionally separate from the OpenShift worker lane.
+
+It carried:
+- private user-approved local compute
+- OCR and AI Vision workflows
+- MLX / Metal model experiments
+- private image workflows
+- GPT-OSS 120B class high-memory testing
+
+The current high-memory public reference is a MacBook Pro M5 Max with 128 GB unified memory. It is not treated as an OpenShift worker. It is a private Linked Device with readiness checks and fail-closed route behavior.
+
+The two high-memory systems are complementary:
+- Strix Halo is the cluster-serving worker.
+- M5 Max is the private Apple Silicon endpoint.
+- Thunderbolt 5 / USB4 direct sideband makes lab artifact movement and validation work faster without becoming a blanket product-routing rule.
+
 ## Network Topology
 At a high level, traffic followed this path:
 1. A public DNS and CDN layer resolved the public application name.

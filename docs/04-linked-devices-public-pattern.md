@@ -15,6 +15,33 @@ Examples of public-safe device classes:
 - family-owned compute devices
 - lab or developer machines approved by the owner
 
+The current high-memory public reference is a MacBook Pro M5 Max with 128 GB unified memory. In the Nessa architecture it is valuable because it can handle Apple Silicon-native model paths, MLX / Metal workloads, OCR, AI Vision, private image workflows, and GPT-OSS 120B class experiments without becoming an OpenShift worker.
+
+## Apple Silicon Reference Lane
+
+The Apple Silicon lane is especially useful for:
+
+- document/photo understanding
+- OCR and AI Vision
+- MLX / Metal model tests
+- private image-generation experiments
+- high-memory local reasoning tests
+- interactive validation before a model is promoted elsewhere
+
+This lane complements the Strix Halo OpenShift worker. The Strix Halo node is platform infrastructure. The MacBook Pro is a user-approved private endpoint.
+
+## Thunderbolt 5 Sideband Pattern
+
+The reference lab also uses a high-speed Thunderbolt 5 / USB4 direct sideband between the Apple Silicon endpoint and the AI-worker side of the platform.
+
+Public-safe lesson:
+
+- direct high-throughput local links can make model artifact movement and validation-payload testing much faster
+- fast local transport is not the same as permission to route private user data
+- product routing still needs explicit policy, readiness, and fail-closed behavior
+
+Private interface names, addresses, route mechanics, and transfer implementation details are intentionally not published.
+
 ## Trust Model
 
 Linked Devices should be explicit and understandable:

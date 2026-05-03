@@ -42,7 +42,19 @@ Observed constraints:
 - storage workloads and inference should be separated clearly
 - local NVMe model cache is a different problem from durable cluster storage and must be treated that way
 
-## 5. Signal and helper-service reality
+## 5. Apple Silicon Linked Device reality
+Apple Silicon is excellent for private high-memory endpoint work, especially OCR, AI Vision, MLX/Metal, image workflows, and GPT-OSS 120B class experimentation.
+
+It is not a normal OpenShift worker.
+
+Constraints:
+- readiness must be checked before routing
+- user approval and trust boundaries matter
+- selected private routes must fail closed when unavailable
+- a fast Thunderbolt 5 / USB4 sideband helps lab operations but does not replace product policy
+- private connector internals and transport mechanics should not be published
+
+## 6. Signal and helper-service reality
 Small utility services can have surprisingly important state.
 
 Example lesson:
@@ -51,7 +63,7 @@ Example lesson:
 
 The broader point is that helper tooling should be reviewed for state, not just for CPU or memory footprint.
 
-## 6. Networking reality
+## 7. Networking reality
 This architecture ran on home-lab-style networking, not a full datacenter fabric.
 
 That means:
@@ -59,7 +71,7 @@ That means:
 - heavy inference and storage traffic can interact in ways you would not see on stronger switching
 - alert thresholds built for large enterprise networks may need interpretation rather than blind panic
 
-## 7. Internet dependency reality
+## 8. Internet dependency reality
 Even a mostly private AI platform still depends on outside services if you use modern convenience features.
 
 Typical dependencies may include:
@@ -70,7 +82,7 @@ Typical dependencies may include:
 
 That does not make the platform less private. It means you should be honest about what parts are local and what parts are still attached to external systems.
 
-## 8. Power and acoustics reality
+## 9. Power and acoustics reality
 A compact four-node environment with one serious AI worker is still a real piece of infrastructure.
 
 Practical expectations:
@@ -78,7 +90,7 @@ Practical expectations:
 - the AI worker changes heat and fan behavior materially compared with the control-plane mini PCs
 - UPS sizing should be based on the whole environment, not just the compact nodes
 
-## 9. Public repo reality
+## 10. Public repo reality
 This repository is intentionally sanitized.
 
 It does not publish:

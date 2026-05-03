@@ -17,6 +17,7 @@ Start with:
 - [10-validation-and-release-discipline.md](./10-validation-and-release-discipline.md)
 - [11-contributing.md](./11-contributing.md)
 - [12-license-and-attribution.md](./12-license-and-attribution.md)
+- [14-hardware-and-model-lab.md](./14-hardware-and-model-lab.md)
 
 Diagrams:
 
@@ -26,3 +27,10 @@ Diagrams:
 - [diagrams/nessaclaw-boundary.md](./diagrams/nessaclaw-boundary.md)
 
 Supplemental historical docs remain available for context. They should be treated as sanitized background material and checked against [00-public-scope-and-redactions.md](./00-public-scope-and-redactions.md) before public reuse.
+
+Hardware and model-lab highlights:
+
+- [06-adding-a-strix-halo-worker.md](./06-adding-a-strix-halo-worker.md)
+- [08-ocr-ai-vision-public-pattern.md](./08-ocr-ai-vision-public-pattern.md)
+- [11-benchmark-results.md](./11-benchmark-results.md)
+- [14-hardware-and-model-lab.md](./14-hardware-and-model-lab.md)

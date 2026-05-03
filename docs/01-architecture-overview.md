@@ -69,9 +69,13 @@ Nessa can reason about several public-safe compute patterns:
 - OpenShift-hosted inference
 - OpenShift AI / KServe serving
 - CPU fallback
-- Strix Halo accelerated lane
-- Apple Silicon Linked Devices
+- Strix Halo / Ryzen AI Max+ 395 accelerated worker lane
+- Apple Silicon Linked Devices, including a MacBook Pro M5 Max 128 GB high-memory lane
 - BYO-AI providers when explicitly chosen
+
+The Strix Halo and Apple Silicon lanes solve different problems. Strix Halo is the OpenShift worker-node pattern for cluster-side inference. Apple Silicon is the private Linked Device pattern for MLX/Metal, OCR, AI Vision, image workflows, and high-memory local model experiments.
+
+See [14-hardware-and-model-lab.md](./14-hardware-and-model-lab.md).
 
 ## Red Hat Product Roles
 
@@ -107,3 +111,4 @@ ODF/Ceph provides durable storage patterns for platform state, documents, worksp
 - Staging proves first; production receives the exact verified artifact.
 - Red Hat platform primitives are useful when paired with evidence discipline.
 - Public docs should explain the architecture without publishing the product clone path.
+- Model claims should be validated on the real lane: Strix Halo, Apple Silicon, CPU fallback, OpenShift AI/KServe, or explicit BYO provider.

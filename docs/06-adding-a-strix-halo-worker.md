@@ -11,8 +11,23 @@ What made it attractive:
 - a desktop-class form factor and power profile rather than a rack-scale GPU server
 - enough CPU and memory headroom to host both heavier inference and supporting model-serving processes
 - a cost point around `~$2,800`, which is materially easier to justify than a `>$10,000` GPU server
+- a clean path to become an OpenShift worker node instead of a disconnected AI appliance
 
 The most important design insight was this: we did not need the strongest possible accelerator on day one. We needed one node that could carry the heavy prompts cleanly without forcing the rest of the cluster into an accelerator experiment.
+
+## Why Not Start With DGX-Class Hardware?
+DGX-class devices are excellent when the goal is a supported NVIDIA AI appliance and the team has the budget, power, cooling, and operations model for that lane.
+
+That was not the Nessa target.
+
+The target was:
+- one strong AI worker that could join the existing OpenShift platform
+- a practical local model-serving lane for a small team
+- a lower-cost way to keep testing newer open-weight models
+- enough acceleration to make the product feel real
+- platform lessons that other builders could reproduce without buying a rack-scale appliance first
+
+The Strix Halo system fit that shape better. It improved the product while also improving the architecture: OpenShift still owned scheduling, rollout discipline, observability, and service boundaries.
 
 ## What Problem It Solved
 By the time the CPU-only phase stabilized, the remaining bottlenecks were obvious:
@@ -98,6 +113,36 @@ Once the AI worker was available, several things changed at the same time:
 
 That last point is underrated. Hardware improvements are often described as throughput wins. In practice, they are also architecture cleanup wins.
 
+## Hugging Face Model Research
+Hugging Face was the model-discovery layer for this lane.
+
+The team looked for models that were:
+- open-weight or otherwise compatible with the intended usage
+- documented clearly enough to evaluate license and runtime constraints
+- available in practical formats such as GGUF, quantized variants, or runtime-specific builds
+- plausible on 128 GB unified memory with the exposed Strix Halo runtime path
+- good candidates for real Nessa workloads: chat, code, writing, OCR/vision adjuncts, image workflows, embeddings, and safety tests
+
+Important public-safe lesson: "runs on a GPU" is not enough. For this hardware class, a model had to run on the exact OS, driver, runtime, quantization, and serving path that the OpenShift worker could actually support.
+
+## Ollama vs llama.cpp
+Both mattered.
+
+Ollama was useful for:
+- quick model pulls and swaps
+- fast practical comparison across model families
+- simple local serving when it won the live benchmark
+- keeping model exploration productive without turning every test into a deployment project
+
+`llama.cpp` / `llama-server` were useful for:
+- lower-level runtime control
+- GGUF-specific testing
+- OpenShift / KServe-style serving experiments
+- explicit local NVMe model-cache behavior
+- tuning prompt, context, warmup, and service lifecycle details
+
+The lesson is not that one runtime permanently beat the other. The lesson is that the runtime was selected by evidence. If Ollama won the measured production-style path, it stayed in front. If `llama.cpp` gave more control for an OpenShift serving experiment, it was the right tool for that experiment.
+
 ## Performance Results
 Representative before/after measurements from this program:
 
@@ -131,7 +176,7 @@ The common assumption that "AMD GPU" means "standard ROCm recipe" turned out to 
 That is not a complaint. It is an engineering reality worth naming plainly.
 
 ### Runtime selection mattered
-Ollama was useful early, but the final, stronger serving path leaned on `llama.cpp` / `llama-server`-style behavior because it gave more direct control and better fit for this deployment.
+Ollama was useful for rapid iteration and stayed valuable when it won live product-style tests. `llama.cpp` / `llama-server`-style behavior became important when the team needed lower-level control, GGUF-specific testing, and OpenShift-serving experiments.
 
 ### The second NVMe took too long to become operationally important
 The hardware shipped with the answer to a later scaling problem already installed. The team just had to mature enough operationally to use it correctly.
@@ -145,6 +190,19 @@ Recommendations:
 - treat local model cache storage as a first-class design concern
 - validate the exact driver and runtime combination instead of assuming generic support statements are enough
 - do not let the AI worker quietly become a storage or random workload dumping ground
+- keep model validation boring: license check, load test, benchmark, product prompt test, safety check, staging proof, then production
+
+## Pairing With Apple Silicon
+The Strix Halo worker was not the only high-memory local AI lane.
+
+The companion Apple Silicon lane, represented by a MacBook Pro M5 Max with 128 GB unified memory, became the strongest private endpoint for OCR, AI Vision, MLX/Metal workloads, private image workflows, and GPT-OSS 120B class experimentation.
+
+That pairing changed the lab:
+- Strix Halo handled OpenShift-hosted inference and cluster-side model-serving tests.
+- M5 Max handled Apple Silicon private endpoint work, especially vision-heavy workflows.
+- Thunderbolt 5 / USB4 direct sideband made large model-artifact and validation-payload movement much faster than treating the ordinary LAN as the only path.
+
+See [14-hardware-and-model-lab.md](./14-hardware-and-model-lab.md).
 
 ## Bottom Line
 For 2026-era home labs and small teams, a Strix Halo class system is one of the most compelling price/performance upgrades available for local AI inference. It is not because the hardware is perfect. It is because it changes the user experience enough to matter while keeping the rest of the OpenShift platform sane.

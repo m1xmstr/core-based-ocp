@@ -72,3 +72,45 @@ graph LR
   Gateway --> GPU["Dedicated AI worker"]
   Gateway --> KServe["OpenShift AI / KServe"]
 ```
+
+## 5. Hardware and model lab
+```mermaid
+flowchart LR
+  Lab["Nessa model lab"] --> HF["Hugging Face<br/>model research"]
+  HF --> Filter["License, fit,<br/>format, safety review"]
+  Filter --> Strix["Strix Halo / Ryzen AI Max+ 395<br/>OpenShift AI worker"]
+  Filter --> Mac["MacBook Pro M5 Max<br/>Apple Silicon Linked Device"]
+  Filter --> CPU["Compact-node<br/>CPU fallback"]
+
+  Strix --> OCP["OpenShift serving<br/>Ollama / llama.cpp / KServe patterns"]
+  Mac --> MLX["MLX / Metal<br/>OCR, AI Vision, GPT-OSS tests"]
+  CPU --> Base["Baseline and resilience"]
+
+  OCP --> Stage["Staging proof"]
+  MLX --> Stage
+  Base --> Stage
+  Stage --> Prod["Promote exact verified artifact"]
+```
+
+## 6. Strix Halo and M5 Max roles
+```mermaid
+flowchart TB
+  subgraph Cluster["OpenShift platform"]
+    Web["Web/API"]
+    Data["PostgreSQL + ODF/Ceph"]
+    Worker["Strix Halo AI worker<br/>128GB unified memory"]
+    Cache["Local NVMe model cache"]
+  end
+
+  subgraph Linked["Private Linked Device lane"]
+    M5["MacBook Pro M5 Max<br/>128GB unified memory"]
+    Vision["OCR / AI Vision<br/>MLX / Metal<br/>GPT-OSS 120B class tests"]
+  end
+
+  Web --> Worker
+  Worker --> Cache
+  Web --> Data
+  Web --> M5
+  M5 --> Vision
+  M5 -. "Thunderbolt 5 / USB4 sideband<br/>artifact and validation-payload movement" .- Worker
+```

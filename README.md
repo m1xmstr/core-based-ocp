@@ -5,11 +5,25 @@
 
 # Nessa AI Reference Architecture
 
-Private family-focused AI platform patterns using Red Hat OpenShift, OpenShift AI, OpenShift Virtualization, Ansible Automation Platform, Event-Driven Ansible, Strix Halo, and Apple Silicon.
+Private family-focused AI platform patterns using Red Hat OpenShift, OpenShift AI, OpenShift Virtualization, Ansible Automation Platform, Event-Driven Ansible, AMD Strix Halo, Apple Silicon, Hugging Face model research, and disciplined staging-to-production validation.
 
 This repository shares the architecture patterns, validation discipline, and platform lessons behind Nessa AI. It does not publish the TryNessa.com product source code or private implementation details.
 
 Nessa AI is a private family-focused AI platform built around a simple principle: AI should help people learn, protect private work, and use user-controlled compute where possible.
+
+## Why This Repo Is Different
+
+This is not a slide-deck architecture sketch. It is a public-safe record of a real private AI platform that has been built, broken, benchmarked, repaired, and hardened over many production runs.
+
+The architecture combines:
+
+- a compact bare-metal OpenShift platform for the application, data, storage, automation, and release discipline
+- a Strix Halo / AMD Ryzen AI Max+ 395 system with 128 GB unified memory as a real OpenShift AI worker node
+- a MacBook Pro M5 Max with 128 GB unified memory as a private Apple Silicon Linked Device for OCR, AI Vision, image workflows, and high-memory model experiments
+- a high-throughput Thunderbolt 5 / USB4 direct sideband between the Apple Silicon and OpenShift AI-worker lane
+- a model lab that continuously evaluates Hugging Face candidates, GGUF builds, MLX builds, Ollama paths, `llama.cpp` paths, and OpenShift AI / KServe-style serving patterns
+
+The goal is to show how a small team can build serious private AI infrastructure without pretending everything requires a rack-scale DGX appliance on day one.
 
 ## What This Repo Is
 
@@ -63,11 +77,26 @@ The production product has evolved beyond the original CPU-first cluster. Curren
 
 - OpenShift as the application, data, and operations platform
 - OpenShift AI and KServe as model-serving and validation building blocks
-- A dedicated Strix Halo lane for local accelerated inference experiments and OpenShift-hosted serving
+- a dedicated Strix Halo / Ryzen AI Max+ 395 lane for local accelerated inference experiments and OpenShift-hosted serving
 - Apple Silicon Linked Devices, including M3 Max as an earlier reference and M5 Max with 128 GB unified memory as the current high-memory private compute lane
+- GPT-OSS 120B class experimentation on Apple Silicon with fail-closed route truth
+- OCR and AI Vision emphasis on private Apple Silicon and vision-language model testing
+- Hugging Face model research with validation before promotion
 - fail-closed privacy posture when a requested private route is unavailable
 - NessaClaw as Nessa's guarded private agent-workspace surface over OpenClaw-compatible infrastructure
 - family-safe Learning and Homework Buddy principles without exposing lesson-flow implementation
+
+## Hardware Lab at a Glance
+
+| Hardware lane | Role | Excels At | Public-safe lesson |
+|---|---|---|---|
+| **Strix Halo / Ryzen AI Max+ 395, 128 GB** | OpenShift AI worker node | cluster-side inference, GGUF model tests, local NVMe model cache, OpenShift AI/KServe-style serving, multi-user service behavior | local AI becomes platform infrastructure when it joins OpenShift as a governed worker |
+| **MacBook Pro M5 Max, 128 GB** | Apple Silicon Linked Device | OCR, AI Vision, MLX/Metal models, GPT-OSS 120B class tests, private image workflows | Apple Silicon is a strong private high-memory lane, especially for document/photo-heavy workflows |
+| **Compact OpenShift nodes** | app/data/storage/control-plane baseline | routes, web/API replicas, PostgreSQL, ODF/Ceph, automation, fallback | specialized AI hardware works better when the platform underneath is already stable |
+
+The Strix Halo unit and the M5 Max are complementary. The Strix Halo lane is the cluster-serving worker. The M5 Max lane is the private Apple Silicon endpoint. Thunderbolt 5 makes the lab workflow fast enough to move large artifacts and validation payloads without treating ordinary LAN paths as the bottleneck.
+
+See [docs/14-hardware-and-model-lab.md](./docs/14-hardware-and-model-lab.md).
 
 ## Red Hat Technologies Used
 
@@ -84,12 +113,29 @@ Product names are used factually. This repository does not imply Red Hat endorse
 
 The reference architecture discusses several public-safe inference lanes:
 
-- **OpenShift / Strix Halo lane**: cluster-side accelerated inference using a high-memory AMD Strix Halo class node.
-- **Apple Silicon Linked Device lane**: private user-approved compute on Apple Silicon, with M3 Max as a prior reference and M5 Max 128 GB unified memory as the current high-memory reference.
+- **OpenShift / Strix Halo lane**: cluster-side accelerated inference using a high-memory AMD Ryzen AI Max+ 395 / Strix Halo class node.
+- **Apple Silicon Linked Device lane**: private user-approved compute on Apple Silicon, with M3 Max as a prior reference and M5 Max 128 GB unified memory as the current high-memory reference for OCR, vision, MLX/Metal, and GPT-OSS 120B class testing.
 - **CPU historical lane**: a useful baseline for understanding why acceleration and routing discipline matter.
 - **BYO-AI lane**: user-controlled external providers, only by explicit user choice and never as a silent fallback when privacy forbids it.
 
 Apple Silicon Linked Devices are not OpenShift workers or KServe pods. They are private linked compute endpoints governed by Nessa policy and user approval.
+
+## Model Lab and Hugging Face Workflow
+
+Nessa treats model selection as an engineering loop, not a one-time download.
+
+Public-safe model-lab steps:
+
+1. find candidate models on Hugging Face, vendor docs, or open model announcements
+2. check license, intended use, model card constraints, and artifact format
+3. decide the likely lane: Strix Halo, Apple Silicon, CPU fallback, OpenShift AI/KServe, or BYO provider
+4. test the actual runtime: Ollama, `llama.cpp`, MLX/Metal, or KServe-style serving
+5. measure cold load, warm load, time-to-first-token, token cadence, task quality, OCR/vision behavior, and safety behavior
+6. promote only after staging proof
+
+Representative public-safe model families include Qwen, Qwen VL, Gemma, DeepSeek R1 distilled models, GPT-OSS 120B, FLUX/MLX image models, and embedding models.
+
+See [docs/14-hardware-and-model-lab.md](./docs/14-hardware-and-model-lab.md) and [docs/11-benchmark-results.md](./docs/11-benchmark-results.md).
 
 ## Linked Devices and Private Compute
 
@@ -158,6 +204,7 @@ Primary public reference docs:
 - [docs/10-validation-and-release-discipline.md](./docs/10-validation-and-release-discipline.md)
 - [docs/11-contributing.md](./docs/11-contributing.md)
 - [docs/12-license-and-attribution.md](./docs/12-license-and-attribution.md)
+- [docs/14-hardware-and-model-lab.md](./docs/14-hardware-and-model-lab.md)
 
 Diagrams:
 

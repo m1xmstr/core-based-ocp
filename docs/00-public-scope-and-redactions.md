@@ -47,6 +47,7 @@ The repo can publish public-safe material such as:
 - AAP and EDA operational patterns
 - ODF/Ceph storage roles without private topology
 - Strix Halo and Apple Silicon lessons at a hardware class level
+- public-safe model-lab methodology, Hugging Face model-family evaluation, and runtime comparison at a class level
 - Linked Devices as a user-owned compute concept
 - BYO-AI as a user-controlled provider concept
 - Learning and family-safety principles
@@ -91,6 +92,7 @@ Never publish:
 - exact routing heuristics, premium route rules, model-selection formulas, fallback thresholds, quota logic, or hidden prompts
 - Learning / Homework Buddy prompt chains, worksheet parsers, anti-cheat logic, solution heuristics, lesson-state schemas, or proprietary tutor flows
 - OCR or AI Vision bypass details, classifier thresholds, hidden prompts, or exact repair heuristics
+- private model-selection heuristics, exact prompt suites, model-cache paths, or account-specific routing behavior
 - child, family, or private user content
 - internal cost margin math, billing decisions, or private financial analytics
 - full NessaClaw tenant manifests, gateway configuration, tokens, direct task execution recipes, or high-risk tool enablement steps
