@@ -41,12 +41,31 @@ flowchart LR
 
 What Nessa adds:
 
+- a one-glance `House right now` answer before any grid of cards
 - one household status surface
 - simple health checks for routers, Pi-hole, NAS, websites, cameras, and Home Assistant entities
 - Home Assistant import for supported entity types
 - private camera snapshot and live-view paths through a Nessa proxy
 - plain-language summaries for parents and non-technical family members
 - safe action boundaries
+
+## The House Right Now Pattern
+
+The front door should answer one household question before showing any dials:
+
+- `All good`
+- `Needs a look`
+- `Something's down`
+
+The line under that state should be plain language, generated from the same readiness data the detail cards already use. That keeps the experience honest and avoids turning a status dashboard into another AI chat request.
+
+The detailed device grid can still be powerful. The calmer pattern is to group it into a few obvious sections:
+
+- Internet
+- Devices
+- Services
+
+This keeps routers, core network checks, cameras, Home Assistant entities, and service health available without making the first screen feel like a network operations console.
 
 ## What We Keep Locked
 

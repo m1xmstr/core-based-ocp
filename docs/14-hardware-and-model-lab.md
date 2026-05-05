@@ -6,6 +6,7 @@ This document explains the public-safe architecture story behind two high-memory
 
 - an AMD Strix Halo / Ryzen AI Max+ 395 system with 128 GB unified memory, used as an OpenShift AI worker node
 - a MacBook Pro M5 Max with 128 GB unified memory, used as a private Apple Silicon Linked Device
+- a Thunderbolt 5 direct sideband between the Apple Silicon endpoint and the Linux companion lane for lab artifact movement and validation work
 
 It also explains why the project tests Hugging Face models continuously, why both Ollama and `llama.cpp` matter, and why this path was chosen instead of starting with a rack-scale DGX-style appliance.
 
@@ -37,7 +38,7 @@ It is valuable because it can become a real OpenShift worker:
 - it can be labeled and isolated for AI workloads
 - it can be observed, drained, validated, and promoted through the same operational habits as the rest of the cluster
 
-The system used in this reference architecture is a Corsair AI Workstation 300 class machine built around AMD Ryzen AI Max+ 395 with 128 GB unified memory.
+The system used in this reference architecture is a Corsair AI Workstation 300 class machine built around AMD Ryzen AI Max+ 395 with 128 GB unified memory and a local NVMe layout sized for both OpenShift workloads and future model-cache experiments.
 
 ### Where Strix Halo excels
 
@@ -114,6 +115,16 @@ The public-safe point is not the private interface details. The point is the arc
 - routing policy still matters; a fast cable is not a privacy policy
 
 In practical terms, the direct path made the Strix/M5 pair feel like a cohesive local AI lab instead of two disconnected machines.
+
+## Mac Primary Plus Linux Companion
+
+The current public-safe pattern is:
+
+- MacBook Pro M5 Max, 128 GB: private Apple Silicon primary Linked Device for OCR, vision, MLX/Metal, private image workflows, and large open-weight experiments
+- Ryzen AI Max+ 395, 128 GB: Linux/OpenShift companion for cluster-hosted serving, cache-heavy experiments, and platform validation
+- Thunderbolt 5 sideband: fast lab transport for artifacts and proof, not a blanket product-routing rule
+
+This is a calm pattern for small private AI teams because it avoids forcing one machine to be everything. The Mac remains a user-approved private endpoint. The Linux box remains platform infrastructure. The direct sideband makes the lab faster without replacing policy, auth, or fail-closed routing.
 
 ## Why Not Just Buy a DGX?
 

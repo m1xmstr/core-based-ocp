@@ -43,6 +43,12 @@ It documents:
 - Smart Home patterns using Home Assistant as the open-source hub where practical
 - sanitized lessons from running a private AI product on real hardware
 
+## Public Access Posture
+
+TryNessa.com is public-facing as a free private AI product. Pro is invite/request-only through [trynessa.com/request-pro](https://www.trynessa.com/request-pro). Ultimate is coming soon.
+
+The public reference architecture documents patterns and lessons. It is not a checkout funnel, billing implementation, or entitlement recipe.
+
 ## What This Repo Is Not
 
 This is not the TryNessa.com product source code.
@@ -86,10 +92,10 @@ The production product has evolved beyond the original CPU-first cluster. Curren
 - Apple Silicon Linked Devices, including M3 Max as an earlier reference and M5 Max with 128 GB unified memory as the current high-memory private compute lane
 - GPT-OSS 120B class experimentation on Apple Silicon with fail-closed route truth
 - OCR and AI Vision emphasis on private Apple Silicon and vision-language model testing
-- Smart Home as a simple household operations surface, with Home Assistant used where it helps connect real devices
+- Smart Home as a simple household operations surface, with Home Assistant used where it helps connect real devices and a one-glance `House right now` answer before detailed cards
 - Hugging Face model research with validation before promotion
 - fail-closed privacy posture when a requested private route is unavailable
-- NessaClaw as Nessa's guarded private agent-workspace surface over OpenClaw-compatible infrastructure
+- NessaClaw as Nessa's guarded private agent-workspace surface over OpenClaw-compatible infrastructure, starting with safe missions and an always-visible stop control
 - family-safe Learning and Homework Buddy principles without exposing lesson-flow implementation
 
 ## Hardware Lab at a Glance
@@ -182,9 +188,12 @@ Public positioning:
 - use **OpenClaw** for the upstream project
 - users interact with Nessa, not a raw OpenClaw route
 - safe WebChat and read-only skills come first
+- first paint should be three safe mission buttons plus an obvious stop button
+- advanced controls should stay one tap away, not above the fold
 - high-impact tools remain locked unless separately approved and validated
 
 See [docs/09-nessaclaw-openclaw-compatible-workspaces.md](./docs/09-nessaclaw-openclaw-compatible-workspaces.md).
+See also [docs/16-nessaclaw-design-philosophy.md](./docs/16-nessaclaw-design-philosophy.md).
 
 ## Learning and Family Safety Principles
 
@@ -229,6 +238,8 @@ Primary public reference docs:
 - [docs/12-license-and-attribution.md](./docs/12-license-and-attribution.md)
 - [docs/14-hardware-and-model-lab.md](./docs/14-hardware-and-model-lab.md)
 - [docs/15-smart-home-and-home-assistant.md](./docs/15-smart-home-and-home-assistant.md)
+- [docs/16-nessaclaw-design-philosophy.md](./docs/16-nessaclaw-design-philosophy.md)
+- [docs/17-hardware-and-model-lab.md](./docs/17-hardware-and-model-lab.md)
 
 Diagrams:
 
