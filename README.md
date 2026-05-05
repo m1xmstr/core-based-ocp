@@ -31,7 +31,7 @@ The goal is to show how a small team can build serious private AI infrastructure
 
 ## What This Repo Is
 
-This is the public reference architecture for Nessa AI / TryNessa.com.
+Public reference architecture for Nessa AI / TryNessa.com.
 
 It documents:
 
