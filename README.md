@@ -41,6 +41,7 @@ It documents:
 - validation discipline, staging-before-production release habits, browser proof expectations, and exact-digest promotion mindset
 - public-safe family AI, Learning, OCR/vision, Linked Devices, and NessaClaw boundary patterns
 - Smart Home patterns using Home Assistant as the open-source hub where practical
+- mobile UX and generated-artifact continuity patterns for private AI products
 - sanitized lessons from running a private AI product on real hardware
 
 ## Public Access Posture

@@ -20,6 +20,7 @@ Start with:
 - [14-hardware-and-model-lab.md](./14-hardware-and-model-lab.md)
 - [15-smart-home-and-home-assistant.md](./15-smart-home-and-home-assistant.md)
 - [18-camera-ux-design.md](./18-camera-ux-design.md)
+- [19-mobile-ux-and-continuity-patterns.md](./19-mobile-ux-and-continuity-patterns.md)
 
 Diagrams:
 
@@ -41,3 +42,7 @@ Smart Home highlights:
 
 - [15-smart-home-and-home-assistant.md](./15-smart-home-and-home-assistant.md)
 - [18-camera-ux-design.md](./18-camera-ux-design.md)
+
+UX and continuity highlights:
+
+- [19-mobile-ux-and-continuity-patterns.md](./19-mobile-ux-and-continuity-patterns.md)
